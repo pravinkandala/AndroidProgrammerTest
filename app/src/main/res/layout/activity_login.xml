@@ -1,0 +1,45 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.apppartner.androidprogrammertest.LoginActivity"
+    android:background="@drawable/bg_login">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/include" />
+
+    <EditText
+        android:layout_marginTop="160dp"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:id="@+id/login_username"
+        android:hint="Username"
+        android:paddingLeft="10dp"
+        android:background="@drawable/graphic_input"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="14dp"
+        android:id="@+id/login_password"
+        android:hint="Password"
+        android:padding="5dp"
+        android:inputType="textPassword"
+        android:background="@drawable/graphic_input"
+        android:layout_below="@id/login_username"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="168dp"
+        android:layout_below="@id/login_password"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_login"
+        android:onClick="onLoginButtonClicked"
+        android:id="@+id/login_button" />
+
+</RelativeLayout>
