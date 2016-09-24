@@ -8,5 +8,6 @@
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_login">ChatActivity</string>
     <string name="title_activity_animation">AnimationActivity</string>
+    <string name="coding_tasks">CODING TASKS</string>
 
 </resources>

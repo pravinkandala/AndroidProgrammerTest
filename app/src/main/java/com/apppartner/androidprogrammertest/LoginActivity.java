@@ -4,11 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,12 +32,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.id.message;
-
 public class LoginActivity extends ActionBarActivity
 {
     EditText usernameET, passwordET;
     long startTime;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,6 +46,15 @@ public class LoginActivity extends ActionBarActivity
 
         usernameET = (EditText) findViewById(R.id.login_username);
         passwordET = (EditText) findViewById(R.id.login_password);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),"fonts/machinatoLight.ttf");
+        usernameET.setTypeface(custom_font);
+        passwordET.setTypeface(custom_font);
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Login");
 
     }
 
@@ -149,5 +161,15 @@ public class LoginActivity extends ActionBarActivity
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

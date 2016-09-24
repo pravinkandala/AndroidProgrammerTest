@@ -3,8 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.apppartner.androidprogrammertest.AnimationActivity">
+    tools:context="com.apppartner.androidprogrammertest.AnimationActivity"
+    android:background="@drawable/bg_animation">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"
+        android:id="@id/toolbar"/>
+
+    <FrameLayout
+        android:layout_below="@id/toolbar"
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/card_background"
+
+        >
+        <com.apppartner.androidprogrammertest.views.activities.AppPartnerIcon
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/app_partner_icon"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_apppartner"/>
+
+    </FrameLayout>
+
+
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:onClick="startFading"
+        android:src="@drawable/btn_fade"
+        android:layout_margin="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+     />
+
+
+
 
 </RelativeLayout>

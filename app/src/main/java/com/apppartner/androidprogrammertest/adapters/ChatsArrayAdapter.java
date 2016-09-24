@@ -1,6 +1,7 @@
 package com.apppartner.androidprogrammertest.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,11 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
         chatCell.usernameTextView = (TextView) convertView.findViewById(R.id.usernameTextView);
         chatCell.messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         chatCell.chatImageView = (ImageView) convertView.findViewById(R.id.chatImageView);
+
+        Typeface custom_font_head = Typeface.createFromAsset(getContext().getAssets(),"fonts/machinato.ttf");
+        Typeface custom_font_body = Typeface.createFromAsset(getContext().getAssets(),"fonts/machinatoLight.ttf");
+        chatCell.usernameTextView.setTypeface(custom_font_head);
+        chatCell.messageTextView.setTypeface(custom_font_body);
 
         ChatData chatData = getItem(position);
 

@@ -1,9 +1,11 @@
 package com.apppartner.androidprogrammertest;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity
 {
@@ -12,6 +14,11 @@ public class MainActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),"fonts/machinatoBold.ttf");
+
+        TextView coding_tasksTv = (TextView)findViewById(R.id.coding_tasks_text);
+
+        coding_tasksTv.setTypeface(custom_font);
     }
 
     public void onLoginButtonClicked(View v)
