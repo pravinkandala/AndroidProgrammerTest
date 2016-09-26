@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -60,8 +61,23 @@ public class LoginActivity extends ActionBarActivity
 
     public void onLoginButtonClicked(View view){
         if(validateFields()){
-            sendPostRequest(usernameET.getText().toString(),passwordET.getText().toString());
+            if(isNetworkAvailable()) sendPostRequest(usernameET.getText().toString(),passwordET.getText().toString());
+            else Toast.makeText(this,"You need internet to do this action!", Toast.LENGTH_LONG).show();
+
         }
+    }
+
+    //check if internet is available
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            return true;
+        }
+        else
+            return false;
+
     }
 
     private Boolean validateFields(){
@@ -131,24 +147,30 @@ public class LoginActivity extends ActionBarActivity
                     e.printStackTrace();
                 }
 
-//                return "CODE : " + code +  " -- MESSAGE : " + message;
 
                 long elapsedTime = System.currentTimeMillis() - startTime;
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-                Log.d("abhishek",result);
 
-                if(result.contains("Success")){
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage(code+message+"Time taken:"+elapsedTime)
+                if(result.contains("Success")){
+                builder.setMessage("CODE: "+code+". \nMessage: "+message+"\nTime:"+elapsedTime)
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                                 finish();
                             }
                         });
+
+                }else{
+                    builder.setTitle("Wrong Credentials. Try again!")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                                    usernameET.setText("");
+                                    passwordET.setText("");
+                                }
+                            });
+                }
                 final AlertDialog alert = builder.create();
                 alert.show();
-                }
             }
         }
 
